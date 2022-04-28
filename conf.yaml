@@ -1,0 +1,10 @@
+scan-options:
+  scanner: "nmap"
+  host-file: 'hosts.txt'
+  cidr-range: ''
+  ports:
+  # Default (-) is all ports
+    - - 
+  args:
+    - -T3
+    - -Pn
