@@ -5,11 +5,6 @@ import nmap
 from colorama import Fore
 
 class Scan:
-    def __init__(self, host, flags, ports):
-        self.host = host
-        self.flags = flags
-        self.ports = ports
-
     # Method to detect if nmap exists on the system (GNU/Linux only)
     def checkInstall(self):
         try:
@@ -23,7 +18,7 @@ class Scan:
     ''' 
     Redirecting stdout should be reserved for a separate function outside of this one.
     '''
-    def scanTarget(self):
+    def scanTarget(self, host, flags, ports):
         host = host.replace('\n', '')
             
         # Output file
@@ -37,7 +32,7 @@ class Scan:
         print(cmd)
 
         # Performs scan (this updates the scanner object with callable data found in a scan)
-        scanner.scan(host, arguments=self.flags, ports=self.ports)
+        scanner.scan(host, arguments=flags, ports=ports)
                 
         # Writes stdout to a file
         with out_file:
@@ -51,3 +46,4 @@ class Scan:
                 fport.sort()
                 for port in fport:
                     out_file.write(f'PORT: {port}\tSTATUS: {scanner[host][proto][port]["state"]}')
+        out_file.close()

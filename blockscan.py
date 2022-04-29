@@ -19,5 +19,4 @@ if __name__ == '__main__':
     with open(file, 'r'):
         agg_hosts = file.readlines()
         for host in file:
-            scan.host = host; scan.flags = conf.getConf('args'); scan.ports = conf.getConf('ports')
-            scan.scanTarget()
+            scan.scanTarget(host, conf.getConf('args'), conf.getConf('ports'))
