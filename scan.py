@@ -13,33 +13,34 @@ class Scan:
         except subprocess.CalledProcessError as subpError:
             print(Fore.RED + f' SUBPROCESS Error Code: {subpError.returncode}')
             return False
+
+    def checkVersion(self):
+        return subprocess.check_output(split('nmap --version'))
     
     # Function to iterate through each host
     ''' 
     Redirecting stdout should be reserved for a separate function outside of this one.
     '''
-    def scanTarget(self, host, flags, ports):
+    def scanTarget(self, host, flags, portNums):
         host = host.replace('\n', '')
 
         # Scanner object
         scanner = nmap.PortScanner()
-            
+
+        # Performs scan (this updates the scanner object with callable data found in a scan)
+        scanner.scan(host, arguments=flags, ports=portNums)
         cmd = scanner.command_line()
         print(cmd)
 
-        # Performs scan (this updates the scanner object with callable data found in a scan)
-        scanner.scan(host, arguments=flags, ports=ports)
-                
         # Writes output to file
         with open(f'{host}.txt', 'w') as out_file:
-            out_file.write(f'HOST: {host} ({scanner[host].hostname()}) \n STATE: {scanner[host].state()}\n')
-
+            out_file.write(f'HOST: {host} ({scanner[host].hostname()})\tSTATE: {scanner[host].state()}\n\n')
             for proto in scanner[host].all_protocols():
-                out_file.write(f'PROTO: {proto}')
+                out_file.write(f'PROTO: {proto}\n')
                     
                 # Ports in overlying protocol
                 fport = scanner[host][proto].keys()
-                fport.sort()
+                sorted(fport)
                 for port in fport:
                     out_file.write(f'PORT: {port}\tSTATUS: {scanner[host][proto][port]["state"]}')
         out_file.close()

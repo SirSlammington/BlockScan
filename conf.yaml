@@ -1,9 +1,7 @@
 scan-options:
   host-file: 'hosts.txt'
   cidr-range: ''
-  ports:
-  # Default (-) is all ports
-    - - 
+  ports: '-'
   args:
     - -T3
     - -Pn
