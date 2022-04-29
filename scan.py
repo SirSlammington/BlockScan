@@ -15,7 +15,7 @@ class Scan:
             return False
 
     def checkVersion(self):
-        return subprocess.check_output(split('nmap --version'))
+        return str(subprocess.check_output(split('nmap --version')))
     
     # Function to iterate through each host
     ''' 
@@ -30,7 +30,7 @@ class Scan:
         # Performs scan (this updates the scanner object with callable data found in a scan)
         scanner.scan(host, arguments=flags, ports=portNums)
         cmd = scanner.command_line()
-        print(cmd)
+        print(Fore.CYAN + cmd)
 
         # Writes output to file
         with open(f'{host}.txt', 'w') as out_file:
@@ -42,5 +42,5 @@ class Scan:
                 fport = scanner[host][proto].keys()
                 sorted(fport)
                 for port in fport:
-                    out_file.write(f'PORT: {port}\tSTATUS: {scanner[host][proto][port]["state"]}')
+                    out_file.write(f'PORT: {port}\tSTATUS: {scanner[host][proto][port]["state"]}\n')
         out_file.close()

@@ -10,9 +10,9 @@ if __name__ == '__main__':
 
     # Checks if Nmap is installed on the system prior to operation
     if scan.checkInstall() == False:
-        print(Fore.RED + 'nmap is not installed on the system.')
+        print(Fore.RED + 'nmap is not installed on the system.\n')
     else:
-        print(Fore.GREEN + scan.checkVersion())
+        print(Fore.GREEN + scan.checkVersion().decode('utf-8') + '\n')
 
     # Opens the file with targets in them and enumerates through them individually
     with open(conf.getConf('host-file'), 'r') as file:
