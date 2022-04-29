@@ -15,7 +15,7 @@ class Scan:
             return False
 
     def checkVersion(self):
-        return str(subprocess.check_output(split('nmap --version')))
+        return subprocess.check_output(split('nmap --version'))
     
     # Function to iterate through each host
     ''' 
