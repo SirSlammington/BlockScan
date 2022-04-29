@@ -20,9 +20,6 @@ class Scan:
     '''
     def scanTarget(self, host, flags, ports):
         host = host.replace('\n', '')
-            
-        # Output file
-        out_file = open(f'{host}.txt', 'w')
 
         # Scanner object
         scanner = nmap.PortScanner()
@@ -33,8 +30,8 @@ class Scan:
         # Performs scan (this updates the scanner object with callable data found in a scan)
         scanner.scan(host, arguments=flags, ports=ports)
                 
-        # Writes stdout to a file
-        with out_file:
+        # Writes output to file
+        with open(f'{host}.txt', 'w') as out_file:
             out_file.write(f'HOST: {host} ({scanner[host].hostname()}) \n STATE: {scanner[host].state()}\n')
 
             for proto in scanner[host].all_protocols():

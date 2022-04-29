@@ -1,5 +1,6 @@
 #!/bin/python3
-from scanconfig import ScanConfig; from scan import Scan
+from scanconfig import ScanConfig
+from scan import Scan
 from colorama import Fore
 
 # Main block
@@ -16,5 +17,6 @@ if __name__ == '__main__':
     # Opens the file with targets in them and enumerates through them individually
     with open(conf.getConf('host-file'), 'r') as file:
         agg_hosts = file.readlines()
-        for host in file:
+        for host in agg_hosts:
             scan.scanTarget(host, conf.parseListArgs(conf.getConf('args')), conf.getConf('ports'))
+    file.close()
