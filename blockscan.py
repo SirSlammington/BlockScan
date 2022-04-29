@@ -15,8 +15,7 @@ if __name__ == '__main__':
         pass
 
     # Opens the file with targets in them and enumerates through them individually
-    file = conf.getConf('host-file')
-    with open(file, 'r'):
+    with open(conf.getConf('host-file'), 'r') as file:
         agg_hosts = file.readlines()
         for host in file:
             scan.scanTarget(host, conf.getConf('args'), conf.getConf('ports'))

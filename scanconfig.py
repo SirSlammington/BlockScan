@@ -14,7 +14,7 @@ class ScanConfig:
     # Returns a specific item from the YAML
     def getConf(self, option):
         data = self.confs
-        return data.get(option)
+        return data[option]
 
     # Puts items in a list into a single string
     def parseListArgs(self, options):
