@@ -5,14 +5,14 @@ from colorama import Fore
 
 # Main block
 if __name__ == '__main__':
+    conf = ScanConfig()
+    scan = Scan()
+
     # Checks if Nmap is installed on the system prior to operation
-    if Scan.checkInstall() == False:
+    if scan.checkInstall() == False:
         print(Fore.RED + 'nmap is not installed on the system.')
     else:
         pass
-
-    conf = ScanConfig()
-    scan = Scan()
 
     # Opens the file with targets in them and enumerates through them individually
     file = conf.getConf('host-file')
