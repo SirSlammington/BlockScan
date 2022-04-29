@@ -1,5 +1,4 @@
 scan-options:
-  scanner: "nmap"
   host-file: 'hosts.txt'
   cidr-range: ''
   ports:
@@ -8,3 +7,4 @@ scan-options:
   args:
     - -T3
     - -Pn
+    - -sV

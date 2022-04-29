@@ -26,7 +26,6 @@ class Scan:
 
         # Scanner object
         scanner = nmap.PortScanner()
-        """f'nmap {" ".join(flags)} {host}'"""
             
         cmd = scanner.command_line()
         print(cmd)

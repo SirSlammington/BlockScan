@@ -1,5 +1,4 @@
 #!/bin/python3
-import sys
 from scanconfig import ScanConfig; from scan import Scan
 from colorama import Fore
 
@@ -18,4 +17,4 @@ if __name__ == '__main__':
     with open(conf.getConf('host-file'), 'r') as file:
         agg_hosts = file.readlines()
         for host in file:
-            scan.scanTarget(host, conf.getConf('args'), conf.getConf('ports'))
+            scan.scanTarget(host, conf.parseListArgs(conf.getConf('args')), conf.getConf('ports'))
