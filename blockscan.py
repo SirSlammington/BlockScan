@@ -5,7 +5,7 @@ from colorama import Fore
 
 # Main block
 if __name__ == '__main__':
-    conf = ScanConfig('.')
+    conf = ScanConfig('conf.yaml')
     scan = Scan()
 
     # Checks if Nmap is installed on the system prior to operation
