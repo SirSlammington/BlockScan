@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/python3
 from scanconfig import ScanConfig
 from scan import Scan
 from colorama import Fore
