@@ -15,8 +15,11 @@ if __name__ == '__main__':
     else:
         print(Fore.GREEN + scan.checkVersion().decode('utf-8'))
 
+    # Function to create a "hosts.txt" file if one does not yet exist
+    conf.createCIDR_File(conf.getConf('cidr-range'))
+
     # Opens the file with targets in them and enumerates through them individually
-    with open(conf.getConf('host-file'), 'r') as file:
+    with open('hosts.txt', 'r') as file:
         agg_hosts = file.readlines()
         while len(agg_hosts) != 0:
             try:

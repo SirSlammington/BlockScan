@@ -1,3 +1,4 @@
+from ipaddress import IPv4Network
 import yaml
 
 # Class for configuration options found in the conf.yaml file
@@ -19,3 +20,14 @@ class ScanConfig:
     # Puts items in a list into a single string
     def parseListArgs(self, options):
         return ' '.join(options)
+
+    # Method to create file based on CIDR block
+    def createCIDR_File(self, cidr_block):
+        if cidr_block == '':
+            return False
+        else:
+            with open('hosts.txt', 'w') as file:
+                block_range = [str(ip) for ip in IPv4Network(cidr_block)]
+                for addr in block_range:
+                    file.write(str(addr) + '\n')
+            file.close()

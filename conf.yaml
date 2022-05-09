@@ -1,5 +1,4 @@
 scan-options:
-  host-file: 'hosts.txt'
   cidr-range: ''
   ports: '22-443, 3389'
   args:
