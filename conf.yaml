@@ -3,6 +3,4 @@ scan-options:
   ports: '22-443, 3389'
   args:
     - -T3
-    - -Pn
-    - -sV
   threads: 3

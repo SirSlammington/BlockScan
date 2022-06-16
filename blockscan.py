@@ -23,28 +23,26 @@ if __name__ == '__main__':
     with open('hosts.txt', 'r') as file:
         agg_hosts = file.readlines()
         while len(agg_hosts) != 0:
-            pool = multp.Pool
+            instr = multp.Process
             try:
                 '''The "threads" signifier is literally only for writing purposes; there are no threads being executed beyond the first few for the parent processes'''
                 # This loop will create the processes ("threads") and subsequently executes them
                 for threads in range(int(conf.getConf('threads'))):
-                    # Empty list of all the processes to be executed
+                    # Empty list of all the processes (scans) to be executed
                     processes = []
-                    scan_attempt = pool(target=scan.scanTarget, args=(agg_hosts[0], conf.parseListArgs(conf.getConf('args')), conf.getConf('ports')))
+                    scan_attempt = instr(target=scan.scanTarget, args=(agg_hosts[threads], conf.parseListArgs(conf.getConf('args')), conf.getConf('ports')))
                     processes.append(scan_attempt)
                     # Starts the "thread"
                     scan_attempt.start()
+                    agg_hosts.pop(threads)
                 
                 # Joins the processes
                 for process in processes:
                     process.join()
 
-                # Deletes the hosts scanned in the list of hosts collected from the hosts file
-                for i in range(int(conf.getConf('threads'))):
-                    agg_hosts.pop(i)
             except IndexError:
                 try:
-                    multp.Pool(target=scan.scanTarget(agg_hosts[0], conf.parseListArgs(conf.getConf('args')), conf.getConf('ports'))).start()
+                    multp.Process(target=scan.scanTarget(agg_hosts[0], conf.parseListArgs(conf.getConf('args')), conf.getConf('ports'))).start()
                     agg_hosts.pop(0)
                 except IndexError:
                     print('No more hosts left to scan.')
