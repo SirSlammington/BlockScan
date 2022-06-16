@@ -21,16 +21,21 @@ class Scan:
     ''' 
     Redirecting stdout should be reserved for a separate function outside of this one.
     '''
-    def scanTarget(self, host, flags, portNums):
+    def scanTarget(self, host, flags, portNums=None):
         host = host.replace('\n', '')
 
         # Scanner object
         scanner = nmap.PortScanner()
 
         # Performs scan (this updates the scanner object with callable data found in a scan)
-        scanner.scan(host, arguments=flags, ports=portNums)
-        cmd = scanner.command_line()
-        print(Fore.CYAN + cmd)
+        try:
+            scanner.scan(host, arguments=flags, ports=portNums)
+            cmd = scanner.command_line()
+            print(Fore.CYAN + cmd)
+        except TypeError:
+            scanner.scan(host, arguments=flags)
+            cmd = scanner.command_line()
+            print(Fore.CYAN + cmd)
 
         # Writes output to file
         with open(f'{host}.txt', 'w') as out_file:
