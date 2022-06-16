@@ -5,3 +5,4 @@ scan-options:
     - -T3
     - -Pn
     - -sV
+  threads: 3
