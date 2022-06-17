@@ -28,6 +28,7 @@ class Scan:
         scanner = nmap.PortScanner()
 
         # Performs scan (this updates the scanner object with callable data found in a scan)
+        '''try/except statement primarily to avoid issues that arise from initiating a scan without any specified ports'''
         try:
             scanner.scan(host, arguments=flags, ports=portNums)
             cmd = scanner.command_line()

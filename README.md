@@ -16,6 +16,7 @@
     - -T3
     - -Pn
     - -sV
+  threads: 3
  ```
  The above are the default options. First, make sure to change the `cidr-range` option, as this will create a file named **hosts.txt** that will contain each host that needs to be scanned. This must be in CIDR notation (e.g. `X.X.X.X/24`). You may change the ports and arguments for each scan as your needs arise.
 

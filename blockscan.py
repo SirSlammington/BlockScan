@@ -25,16 +25,15 @@ if __name__ == '__main__':
         while len(agg_hosts) != 0:
             instr = multp.Process
             try:
-                '''The "threads" signifier is literally only for writing purposes; there are no threads being executed beyond the first few for the parent processes'''
                 # This loop will create the processes ("threads") and subsequently executes them
-                for threads in range(int(conf.getConf('threads'))):
+                for process_count in range(int(conf.getConf('threads'))):
                     # Empty list of all the processes (scans) to be executed
                     processes = []
-                    scan_attempt = instr(target=scan.scanTarget, args=(agg_hosts[threads], conf.parseListArgs(conf.getConf('args')), conf.getConf('ports')))
+                    scan_attempt = instr(target=scan.scanTarget, args=(agg_hosts[process_count], conf.parseListArgs(conf.getConf('args')), conf.getConf('ports')))
                     processes.append(scan_attempt)
                     # Starts the "thread"
                     scan_attempt.start()
-                    agg_hosts.pop(threads)
+                    agg_hosts.pop(process_count)
                 
                 # Joins the processes
                 for process in processes:
