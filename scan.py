@@ -6,7 +6,7 @@ from colorama import Fore
 
 class Scan:
     # Method to detect if nmap exists on the system (GNU/Linux only)
-    def checkInstall(self):
+    def checkInstall(self) -> bytes:
         try:
             subprocess.check_output(split('which nmap'))
             return True
@@ -14,7 +14,7 @@ class Scan:
             print(Fore.RED + f' SUBPROCESS Error Code: {subpError.returncode}')
             return False
 
-    def checkVersion(self):
+    def checkVersion(self) -> bytes:
         return subprocess.check_output(split('nmap --version'))
     
     # Function to iterate through each host
