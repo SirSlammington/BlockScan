@@ -49,4 +49,3 @@ class Scan:
                 sorted(fport)
                 for port in fport:
                     out_file.write(f'PORT: {port}\tSTATUS: {scanner[host][proto][port]["state"]}\n')
-        out_file.close()
