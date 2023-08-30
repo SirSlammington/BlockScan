@@ -30,4 +30,3 @@ class ScanConfig:
                 block_range = [str(ip) for ip in IPv4Network(cidr_block)]
                 for addr in block_range:
                     file.write(str(addr) + '\n')
-            file.close()
